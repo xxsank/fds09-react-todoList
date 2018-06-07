@@ -2,30 +2,16 @@ import React, { Component } from 'react';
 
 let count = 0;
 
-const todos = [
-  {
-    id:1,
-    body: 'React 공부',
-    complete: true
-  },
-  {
-    id:2,
-    body: 'Redux 공부',
-    complete: false
-  }
-];
-
-
 class App extends Component {
   state = {
     todos:[
       {
-        id:1,
+        id:count++,
         body: 'React 공부',
         complete: true
       },
       {
-        id:2,
+        id:count++,
         body: 'Redux 공부',
         complete: false
       }
