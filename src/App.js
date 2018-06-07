@@ -89,6 +89,12 @@ class App extends Component {
                  })
                })
              }}>완료</button>
+
+             <button onClick={e =>{
+               this.setState({
+                 todos: todos.filter(t =>  todo.id !== t.id)
+               })
+             }}>삭제</button>
              </li>
            ))
          }
