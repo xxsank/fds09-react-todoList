@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import TodoItem from './components/TodoItem';
 
 let count = 0;
 
@@ -7,23 +8,23 @@ class App extends Component {
     todos: [
       {
         id: count++,
-        body: "React 공부",
+        body: 'React 공부',
         complete: true
       },
       {
         id: count++,
-        body: "Redux 공부",
+        body: 'Redux 공부',
         complete: false
-      }
+      },
     ],
-    newTodoBody: ""
-  };
+    newTodoBody: ''
+  }
 
   handleInputChange = e => {
     this.setState({
       newTodoBody: e.target.value
     });
-  };
+  }
 
   handleButtonClick = e => {
     if (this.state.newTodoBody) {
@@ -34,11 +35,14 @@ class App extends Component {
       };
 
       this.setState({
-        todos: [...this.state.todos, newTodo],
-        newTodoBody: ""
+        todos: [
+          ...this.state.todos,
+          newTodo
+        ],
+        newTodoBody: ''
       });
     }
-  };
+  }
 
   handleTodoItemComplete = id => {
     this.setState({
@@ -51,67 +55,42 @@ class App extends Component {
         }
         return newTodo;
       })
-    });
-  };
+    })
+  }
 
   handleTodoItemDelete = id => {
     this.setState({
       todos: this.state.todos.filter(t => id !== t.id)
-    });
-  };
+    })
+  }
 
   render() {
-    const { todos, newTodoBody } = this.state;
+    const {todos, newTodoBody} = this.state;
     return (
       <div>
         <h1>할 일 목록</h1>
         <label>
           새 할일
-          <input
-            type="text"
-            value={newTodoBody}
-            onChange={this.handleInputChange}
-          />
+          <input type="text" value={newTodoBody} onChange={this.handleInputChange} />
           <button onClick={this.handleButtonClick}>추가</button>
         </label>
         <ul>
-          {todos.map(todo => (
-            <TodoItem
-              key={todo.id}
-              {...todo}
-              onComplete={this.handleTodoItemComplete}
-              onDelete={this.handleTodoItemDelete}
-            />
-          ))}
+          {
+            todos.map(todo => (
+              <TodoItem
+                key={todo.id} 
+                {...todo}
+                onComplete={this.handleTodoItemComplete} 
+                onDelete={this.handleTodoItemDelete} 
+              />
+            ))
+          }
         </ul>
       </div>
     );
   }
 }
 
-class TodoItem extends Component {
-  render() {
-    const { id, body, complete, onComplete, onDelete } = this.props;
-    return (
-      <li className={complete ? "complete" : ""} key={id}>
-        {body}
-        <button
-          onClick={e => {
-            onComplete(id);
-          }}
-        >
-          완료
-        </button>
-        <button
-          onClick={e => {
-            onDelete(id);
-          }}
-        >
-          삭제
-        </button>
-      </li>
-    );
-  }
-}
+
 
 export default App;
