@@ -5,7 +5,7 @@ import axios from 'axios';
 let count = 1;
 
 const todoAPI = axios.create({
-  baseURL: "https://fds-react-todolist.glitch.me/"
+  baseURL: process.env.REACT_APP_API_URL
 })
 
 class App extends Component {
