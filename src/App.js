@@ -1,10 +1,24 @@
 import React from 'react';
 
 import TodoPage from './pages/TodoPage'
+import LoginPage from './pages/LoginPage';
 export default class App extends React.Component{
+  state = {
+    page: 'login'
+  }
+
+  goToTodoPage = () => {
+    this.setState({
+      page: 'todo'
+    })
+  }
+
   render(){
+    const{page} = this.state
     return(
-      <TodoPage/>
+      <div>
+        {page === 'login' ? <LoginPage onLogin={this.goToTodoPage}/> : <TodoPage/>}
+      </div>
     )
   }
 }
