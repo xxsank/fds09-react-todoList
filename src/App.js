@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import TodoList from './components/TodoList';
 import axios from 'axios';
 
-let count = 1;
+import TodoList from './components/TodoList';
+import Todoform from './components/TodoForm'
 
 const todoAPI = axios.create({
   baseURL: process.env.REACT_APP_API_URL
@@ -11,19 +11,7 @@ const todoAPI = axios.create({
 class App extends Component {
   state = {
     loading: false,
-    todos: [
-      // {
-      //   id: count++,
-      //   body: 'React 공부',
-      //   complete: true
-      // },
-      // {
-      //   id: count++,
-      //   body: 'Redux 공부',
-      //   complete: false
-      // },
-    ],
-    newTodoBody: ''
+    todos: [],
   }
 
   async componentDidMount(){
@@ -41,18 +29,16 @@ class App extends Component {
     })
   }
 
-  
-
-  handleInputChange = e => {
+  goToTodoPage = () => {
     this.setState({
-      newTodoBody: e.target.value
-    });
+      page: 'todolist'
+    })
   }
 
-  handleButtonClick = async e => {
-    if (this.state.newTodoBody) {
+  createTodo = async newTodoBody => {
+    if (newTodoBody) {
       const newTodo = {
-        body: this.state.newTodoBody,
+        body: newTodoBody,
         complete: false,
       };
       this.setState({
@@ -60,10 +46,6 @@ class App extends Component {
       })
       await todoAPI.post(`todos/`, newTodo);
       await this.fetchTodos();
-
-      this.setState({
-        newTodoBody: ''
-      });
     }
   }
 
@@ -96,30 +78,25 @@ class App extends Component {
   }
 
   render() {
-    const {todos, newTodoBody, loading} = this.state;
+    const {todos,loading} = this.state;
     return (
       <div>
-        <h1>할 일 목록</h1>
-        <label>
-          새 할일
-          <input type="text" value={newTodoBody} onChange={this.handleInputChange} />
-          <button onClick={this.handleButtonClick}>추가</button>
-        </label>
-        {loading ? (
-          <div>loading...</div>
-          ) : (
-            <TodoList 
-        todos={todos} 
-        handleTodoItemComplete={this.handleTodoItemComplete}
-        handleTodoItemDelete={this.handleTodoItemDelete}
-        handleTodoItemBodyUpdate={this.handleTodoItemBodyUpdate}
-        />
+          <h1>할 일 목록</h1>
+          <Todoform onCreate={this.createTodo}/>
+          {loading ? (
+            <div>loading...</div>
+            ) : (
+          <TodoList 
+          todos={todos} 
+          handleTodoItemComplete={this.handleTodoItemComplete}
+          handleTodoItemDelete={this.handleTodoItemDelete}
+          handleTodoItemBodyUpdate={this.handleTodoItemBodyUpdate}
+          />
           )}
       </div>
     );
   }
 }
-
 
 
 export default App;
