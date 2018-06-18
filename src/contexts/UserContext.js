@@ -16,15 +16,10 @@ class UserProvider extends React.Component{
   
       // localstorage 토큰 저장
       localStorage.setItem('token', res.data.token);
-  
-      //페이지 전환
-      this.props.onLogin();
-    }
-    catch(e){
-      if(e.response && e.response.status === 400){
+    } catch(e){
+        if(e.response && e.response.status === 400){
           alert('아이디 혹은 비밀번호가 일치 하지 않습니다.');
       }
-      console.log(e.response.status);
     }
   }
 
