@@ -1,44 +1,31 @@
 import React from 'react';
 
 export default class LoginForm extends React.Component{
-  state = {
-    username: '',
-    password: ''
-  }
-
-  handleUsernameChange = e => {
-    this.setState({
-      username: e.target.value
-    })
-  }
-
-  handlePasswordChange = e => {
-    this.setState({
-      password: e.target.value
-    })
-  }
-
-  handleLoginClick = async e => {
-    const  {onLogin} = this.props;
-    onLogin(this.state.username, this.state.password);
+  
+  loginEvent =  e => {
+    e.preventDefault();
+      const username =  e.target.elements.username.value
+      const password =  e.target.elements.password.value
+      const  {onLogin} = this.props;
+      onLogin(username,password)
   }
 
   render(){
     const {onLogin} = this.props;
-    const {username,password} = this.state;
+    // const {username,password} = this.state;
     return(
-      <div>
+      <form onSubmit={this.loginEvent}>
         <h1>로그인 페이지</h1>
         <label>
           아이디:
-          <input type="text" value={username} onChange={this.handleUsernameChange}/>
+          <input defaultValue="fdds" type="text" name="username"/>
         </label>
         <label>
           비밀번호:
-          <input type="password" value={password} onChange={this.handlePasswordChange}/>
+          <input type="password" name="password" />
         </label>
-        <button onClick={this.handleLoginClick}>로그인</button>
-      </div>
+        <button>로그인</button>
+      </form>
     )
   }
 }
