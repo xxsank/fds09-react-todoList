@@ -18,7 +18,7 @@ export default class LoginForm extends React.Component{
         <h1>로그인 페이지</h1>
         <label>
           아이디:
-          <input defaultValue="fdds" type="text" name="username"/>
+          <input defaultValue="fds" type="text" name="username"/>
         </label>
         <label>
           비밀번호:
