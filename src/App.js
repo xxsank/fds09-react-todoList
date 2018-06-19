@@ -12,7 +12,7 @@ export default class App extends React.Component{
       <PageProvider>
         <UserProvider>
           <PageConsumer>
-            {value => value.page === 'login' ? (<LoginPage/>) : (<TodoProvider><TodoPage/></TodoProvider>)}
+            {value => value.page === 'login' ? (<LoginPage/>) : (<TodoPage/>)}
           </PageConsumer>
         </UserProvider>
       </PageProvider>
