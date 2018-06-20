@@ -7,11 +7,6 @@ import {TodoConsumer} from '../contexts/TodoContext';
 
 export default class TodoContainer extends React.Component{
   render() {
-    if(!localStorage.getItem('token')){
-      return (
-        <Redirect to="/login"/>
-      )
-    } else {
       return (
         <TodoConsumer>
           {
@@ -34,6 +29,5 @@ export default class TodoContainer extends React.Component{
           }
         </TodoConsumer>
       );
-    }
   }
 }
