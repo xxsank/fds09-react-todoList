@@ -11,8 +11,6 @@ export default class LoginForm extends React.Component{
   }
 
   render(){
-    const {onLogin} = this.props;
-    // const {username,password} = this.state;
     return(
       <form onSubmit={this.loginEvent}>
         <h1>로그인 페이지</h1>

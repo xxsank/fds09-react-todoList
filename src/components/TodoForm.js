@@ -1,6 +1,9 @@
 import React from 'react';
 
 export default class Todoform extends React.Component{
+  static defaultProps = {
+    onCreate: () => {} // 할 일 추가 버튼 클릭 시 호출되는 함수
+  }
   state = {
     newTodoBody: ''
   }
